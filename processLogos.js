@@ -1,15 +1,27 @@
 const Jimp = require("jimp");
 
-async function resize() {
+async function resize(file) {
   // Function name is same as of file name
   // Reading Image
-  const image = await Jimp.read("./img/rubber-ducky.jpg");
+  const image = await Jimp.read("./img/" + file);
   image
-    .resize(40, 40, function (err) {
+    .resize(40, Jimp.AUTO, function (err) {
       if (err) throw err;
     })
-    .write("./resize.jpeg");
+    .write("./" + file);
+
+  console.log("created: " + file);
 }
 
-resize(); // Calling the function here using async
-console.log("Image is processed successfully");
+const fs = require("fs");
+
+const startPath = "./img/";
+
+fs.readdir(startPath, (err, folder) => {
+  console.log(folder);
+
+  folder.forEach((file) => {
+    console.log("found:", file);
+    resize(file);
+  });
+});
