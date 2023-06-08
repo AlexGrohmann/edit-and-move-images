@@ -1,10 +1,10 @@
 const Jimp = require("jimp");
 
 async function resize(file) {
-  // Function name is same as of file name
   // Reading Image
   const image = await Jimp.read("./img/" + file);
   image
+    //image.resize( w, h[, mode] );     // resize the image. Jimp.AUTO can be passed as one of the values.
     .resize(40, Jimp.AUTO, function (err) {
       if (err) throw err;
     })
