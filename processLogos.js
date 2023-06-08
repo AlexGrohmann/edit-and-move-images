@@ -10,6 +10,8 @@ async function resize(file) {
     })
     .write("./" + file);
 
+  image.write("./demo/" + file);
+
   console.log("created: " + file);
 }
 
